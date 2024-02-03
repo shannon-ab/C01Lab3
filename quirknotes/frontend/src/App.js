@@ -113,24 +113,17 @@ function App() {
   };
 
   const patchNoteState = (_id, title, content) => {
-    setNotes((prevNotes) => {
-      const newNotes = prevNotes.map((note) => {
-        if (note._id === _id) {
-          return {
-            ...note,
-            ...(title && { title }),
-            ...(content && { content }),
-          };
-        }
-        else{
-          return note;
-        }
-      });
-      
-      // Log for debugging
-      console.log('Updated notes:', newNotes);
-      return newNotes;
-    });
+    setNotes(prevNotes =>
+      prevNotes.map(note =>
+        note._id === _id
+          ? {
+              ...note,
+              ...(title && { title }),
+              ...(content && { content }),
+            }
+          : note
+      )
+    );
   };
   
 
